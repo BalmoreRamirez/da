@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel administrativo de clientes de DA Sublimación.">
+  <title>Clientes | DA Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a class="admin-brand" href="../index.html" aria-label="Volver a la web pública">
+          <span class="brand-mark">DA</span>
+          <span><strong>DA</strong><small>ADMIN</small></span>
+        </a>
+        <button class="sidebar-close" type="button" aria-label="Cerrar menú">×</button>
+      </div>
+      <p class="workspace-label">OPERACIÓN</p>
+      <nav class="side-nav" aria-label="Navegación administrativa">
+        <a class="side-link active" href="#clientes"><span class="side-icon">◌</span>Clientes <b id="navClientCount">0</b></a>
+        <a class="side-link" href="presupuestos.html"><span class="side-icon">▤</span>Presupuestos</a>
+        <a class="side-link muted-link" href="#pedidos"><span class="side-icon">◫</span>Pedidos <small>Próximo</small></a>
+      </nav>
+      <p class="workspace-label">SISTEMA</p>
+      <nav class="side-nav">
+        <a class="side-link muted-link" href="#reportes"><span class="side-icon">◒</span>Reportes <small>Próximo</small></a>
+        <a class="side-link muted-link" href="#configuracion"><span class="side-icon">⚙</span>Configuración <small>Próximo</small></a>
+      </nav>
+      <div class="sidebar-bottom"><div class="support-mark">?</div><div><strong>¿Necesitas ayuda?</strong><span>Consulta la guía rápida</span></div></div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" type="button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        <div class="breadcrumb"><span>Operación</span><b>/</b><strong>Clientes</strong></div>
+        <div class="top-actions"><button class="icon-button" type="button" aria-label="Notificaciones">♢<i></i></button><div class="user-menu"><span class="avatar">MR</span><span><strong>María Rodríguez</strong><small>Administrador</small></span><button class="chevron" type="button" aria-label="Abrir menú de usuario">⌄</button></div></div>
+      </header>
+
+      <main class="content" id="clientes">
+        <div class="page-intro"><div><p class="eyebrow"><span></span> Base comercial</p><h1>Clientes</h1><p class="intro-copy">Una vista clara de las personas y empresas detrás de cada proyecto.</p></div><button class="primary-button" id="newClientButton" type="button"><span>+</span> Nuevo cliente</button></div>
+
+        <section class="metric-grid" aria-label="Resumen de clientes"><article class="metric-card"><span class="metric-icon pink">◌</span><div><small>Total de clientes</small><strong id="totalClients">0</strong><span class="metric-trend">↑ <b>12%</b> este mes</span></div></article><article class="metric-card"><span class="metric-icon yellow">✦</span><div><small>Clientes activos</small><strong id="activeClients">0</strong><span class="metric-trend">↑ <b>8%</b> este mes</span></div></article><article class="metric-card"><span class="metric-icon blue">↗</span><div><small>Nuevos este mes</small><strong id="newClients">0</strong><span class="metric-trend neutral">Registro actualizado</span></div></article></section>
+
+        <section class="client-section panel"><div class="section-toolbar"><div><h2>Directorio de clientes</h2><p>Consulta, actualiza y revisa la actividad comercial.</p></div><div class="toolbar-actions"><button class="secondary-button" id="exportButton" type="button">⇩ Exportar</button><button class="filter-button" id="filterButton" type="button">☷ Filtrar <span id="filterCount"></span></button></div></div><div class="filter-row"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar por nombre, empresa, correo o teléfono..."></label><select id="statusFilter" aria-label="Filtrar por estado"><option value="all">Todos los estados</option><option value="active">Activo</option><option value="prospect">Prospecto</option><option value="recurring">Recurrente</option><option value="inactive">Inactivo</option></select><button class="clear-filter" id="clearFilter" type="button" hidden>Limpiar filtros</button></div><div class="table-wrap"><table><thead><tr><th><input type="checkbox" aria-label="Seleccionar todos"></th><th>Cliente</th><th>Contacto</th><th>Estado</th><th>Última actividad</th><th>Pedidos</th><th></th></tr></thead><tbody id="clientTableBody"></tbody></table><div class="empty-state" id="emptyState" hidden><span>⌕</span><h3>No encontramos clientes</h3><p>Prueba con otro término o registra un nuevo cliente.</p></div></div><div class="table-footer"><span id="resultCount">0 clientes</span><div class="pagination"><button type="button" disabled>‹</button><button type="button" class="current">1</button><button type="button" disabled>›</button></div></div></section>
+      </main>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <aside class="client-drawer" id="clientDrawer" aria-labelledby="drawerTitle" aria-hidden="true"><div class="drawer-header"><div><p class="eyebrow"><span></span> Ficha de cliente</p><h2 id="drawerTitle">Nuevo cliente</h2></div><button class="drawer-close" id="drawerClose" type="button" aria-label="Cerrar ficha">×</button></div><div class="drawer-body"><div class="profile-summary"><span class="profile-avatar" id="profileAvatar">NC</span><div><strong id="profileName">Nuevo cliente</strong><span id="profileType">Persona natural</span></div><span class="status-pill active" id="profileStatus">Activo</span></div><div class="detail-tabs"><button class="detail-tab active" type="button">Información</button><button class="detail-tab" type="button">Actividad <span id="activityCount">0</span></button></div><form id="clientForm"><input type="hidden" id="clientId"><div class="form-grid"><label>Tipo de cliente<select id="clientType" required><option value="person">Persona natural</option><option value="company">Empresa</option></select></label><label>Estado<select id="clientStatus" required><option value="active">Activo</option><option value="prospect">Prospecto</option><option value="recurring">Recurrente</option><option value="inactive">Inactivo</option></select></label><label class="full">Nombre o razón social<input id="clientName" type="text" placeholder="Ej. Andrea Martínez" required></label><label>Correo electrónico<input id="clientEmail" type="email" placeholder="correo@empresa.com" required></label><label>Teléfono / WhatsApp<input id="clientPhone" type="tel" placeholder="+503 7000 0000" required></label><label>Identificación<input id="clientDocument" type="text" placeholder="Opcional"></label><label>Ciudad<input id="clientCity" type="text" placeholder="San Salvador"></label><label class="full">Dirección<input id="clientAddress" type="text" placeholder="Dirección de entrega o facturación"></label><label class="full">Etiquetas<input id="clientTags" type="text" placeholder="Ej. empresa, uniformes, recurrente"></label><label class="full">Notas internas<textarea id="clientNotes" rows="3" placeholder="Información útil para el equipo..."></textarea></label></div><div class="duplicate-warning" id="duplicateWarning" hidden>Ya existe un cliente con este correo o teléfono. Revisa la información antes de guardar.</div><div class="drawer-actions"><button class="secondary-button" id="cancelButton" type="button">Cancelar</button><button class="primary-button" type="submit">Guardar cliente</button></div></form><section class="related-section"><div class="related-heading"><h3>Actividad relacionada</h3><span id="relatedCount">0</span></div><div class="related-card"><span>▤</span><div><strong>Presupuestos</strong><small>Se mostrarán aquí cuando exista el módulo</small></div></div><div class="related-card"><span>◫</span><div><strong>Pedidos</strong><small>Se mostrarán aquí cuando exista el módulo</small></div></div></section></div></aside>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
